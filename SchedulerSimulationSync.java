@@ -55,7 +55,12 @@ class SharedResources {
     // Method to increment completed process counter
     public static void incrementCompletedProcess() {
         // TODO: Protect this critical section with a lock
-        completedProcessCount++;
+        lock.lock(); //33
+        try {
+            completedProcessCount++;
+        } finally {
+            lock.unlock();
+        }
     }
     
     // Method to add waiting time
